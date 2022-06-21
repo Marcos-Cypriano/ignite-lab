@@ -15,7 +15,7 @@ export class ProductsService {
     }
 
     async getProductById(id: string) {
-        return this.prisma.product.findUnique({
+        return await this.prisma.product.findUnique({
             where: {
                 id
             }
@@ -35,7 +35,7 @@ export class ProductsService {
             throw new Error('Another product with same slug already exists!')
         }
 
-        return this.prisma.product.create({
+        return await this.prisma.product.create({
             data: {
                 title,
                 slug
