@@ -30,7 +30,7 @@ model Product {
 
 enum PurchaseStatus {
   PENDING
-  APROVED
+  APPROVED
   FAILED
 }
 
