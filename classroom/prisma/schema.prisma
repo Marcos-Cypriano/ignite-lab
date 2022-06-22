@@ -19,7 +19,9 @@ model Student {
 model Course {
   id String @id @default(uuid())
 
-  title String @unique
+  title String
+
+  slug String @unique
 
   enrolledOn Enrollment[]
 
