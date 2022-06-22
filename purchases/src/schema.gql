@@ -8,6 +8,11 @@ type Product {
   slug: String!
 }
 
+type Customer {
+  id: ID!
+  purchases: [Purchase!]!
+}
+
 type Purchase {
   id: ID!
   status: PurchaseStatus!
@@ -30,6 +35,7 @@ scalar DateTime
 type Query {
   products: [Product!]!
   purchases: [Purchase!]!
+  me: Customer!
 }
 
 type Mutation {
