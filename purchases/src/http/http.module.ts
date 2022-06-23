@@ -6,6 +6,7 @@ import path from 'node:path'
 
 import { DatabaseModule } from '../database/database.module';
 import { ProductsResolver } from '../http/graphql/resolvers/products.resolver';
+import { MessagingModule } from '../messaging/messaging.module';
 import { CustomersService } from '../services/customers.service';
 import { ProductsService } from '../services/products.service';
 import { PurchasesService } from '../services/purchases.service';
@@ -16,21 +17,22 @@ import { PurchasesResolver } from './graphql/resolvers/purchases.resolver';
     imports: [
         ConfigModule.forRoot(),
         DatabaseModule,
+        MessagingModule,
         GraphQLModule.forRoot({
             driver: ApolloDriver,
             autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
         })
     ],
     providers: [
-        //Products
+        // Products
         ProductsResolver,
         ProductsService,
 
-        //Purchases
+        // Purchases
         PurchasesResolver,
         PurchasesService,
 
-        //Customers
+        // Customers
         CustomersResolver,
         CustomersService
     ]
