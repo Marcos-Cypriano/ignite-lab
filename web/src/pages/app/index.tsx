@@ -1,5 +1,5 @@
 import { useUser, withPageAuthRequired } from "@auth0/nextjs-auth0"
-import { useGetProductsQuery } from "../../graphql/generated/graphql"
+import {  useMeQuery } from "../../graphql/generated/graphql"
 import { getServerPageGetProducts, ssrGetProducts } from "../../graphql/generated/page"
 import { withApollo } from "../../lib/withApollo"
 
@@ -8,7 +8,8 @@ function Home({ data }) {
 
     // Query pelo client side
     //const { data, loading, error } = useGetProductsQuery()
-
+    const { data: me } = useMeQuery()
+    
     return (
         <div>
             <h1>Hello World</h1>
@@ -16,7 +17,7 @@ function Home({ data }) {
 
             <h2>Courses:</h2>
             <pre>
-                {JSON.stringify(data.products, null, 2)}
+                {JSON.stringify(me, null, 2)}
             </pre>
             <br />
 
@@ -28,10 +29,14 @@ function Home({ data }) {
     )
 }
 
-// Query pelo server side
 export const getServerSideProps = withPageAuthRequired({
     getServerSideProps: async (ctx) => {
-        return getServerPageGetProducts({}, ctx)
+        // Query pelo server side
+        //return getServerPageGetProducts({}, ctx)
+
+        return {
+            props: {}
+        }
     }
 })
 export default withApollo(
