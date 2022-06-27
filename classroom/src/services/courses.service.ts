@@ -32,7 +32,7 @@ export class CoursesService {
     }
 
     async createCourse({ title, slug }: CreateCourseParams) {
-        const courseSlug = slug ?? slugify(title, { lower: true })
+        const courseSlug = slug ?? slugify(title, { lower: true, remove: /[$-/:-?{-~!"^_`\[\]]/ })
 
         const courseAlreadyExists = await this.prisma.course.findFirst({
             where: {
