@@ -1,6 +1,5 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
-import { isLeafType } from 'graphql';
 import { CustomersService } from '../../../services/customers.service';
 import { ProductsService } from '../../../services/products.service';
 import { PurchasesService } from '../../../services/purchases.service';
@@ -42,6 +41,15 @@ export class PurchasesResolver {
             customer = await this.customersService.createCustomer({
                 authUserId: user.sub
             })
+        }
+
+        let enrollmentAlreadyExists = await this.purchasesService.getPurchaseByCustomerAndProductIds({
+            customerId: customer.id,
+            productId: data.productId
+        })
+
+        if(enrollmentAlreadyExists) {
+            throw new Error('You are already enrolled in this course!')
         }
             
         return this.purchasesService.createPurchase({

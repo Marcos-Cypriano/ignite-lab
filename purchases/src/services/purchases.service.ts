@@ -22,6 +22,15 @@ export class PurchasesService {
         })
     }
 
+    async getPurchaseByCustomerAndProductIds ({customerId, productId}) {
+        return await this.prisma.purchase.findFirst({
+            where: {
+                customerId,
+                productId
+            }
+        })
+    }
+
     async listAllFromCustomer(customerId: string) {
         return await this.prisma.purchase.findMany({
             where: {

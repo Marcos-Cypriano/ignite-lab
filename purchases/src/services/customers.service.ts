@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../database/prisma/prisma.service";
+import { Customer } from '../http/graphql/models/customers'
 
 interface CreateCustomerParams {
     authUserId: string

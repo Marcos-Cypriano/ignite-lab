@@ -15,6 +15,7 @@ export class KafkaService extends ClientKafka implements OnModuleInit, OnModuleD
 
     async onModuleInit() {
         await this.connect()
+        console.log('[Purchases] Microservice running!')
     }
 
     async onModuleDestroy() {

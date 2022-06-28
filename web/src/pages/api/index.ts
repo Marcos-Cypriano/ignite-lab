@@ -11,6 +11,9 @@ export const config = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { accessToken } = await getAccessToken(req, res)
 
+    // If needed the token to work on something directly with the graphql backend services
+    //console.log(accessToken)
+
     return httpProxyMiddleware(req, res, {
         target: 'http://localhost:3332/graphql',
         headers: {
